@@ -1,5 +1,13 @@
 import discord
+import json
 
+config = dict()
+try:
+    with open ('config.json') as con_file:
+        config = json.load (con_file)
+except:
+    print('Uh oh!')
+    exit(42)
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as {0}!'.format(self.user))
@@ -22,4 +30,4 @@ class MyClient(discord.Client):
                     await message.author.send("Your message has been removed for not containing an image. Please use <#1003962153268695140> for chatting.")
 
 client = MyClient()
-client.run('MTAwMzk2MTAxODcwMTA2NjI3Mg.GT6tcG.jVb_gWrnaTaw8R87sSJ0cU5d6ejFUvRLIWoJjc')
+client.run(config['token'])
